@@ -29,15 +29,16 @@ configure(allprojects) { project ->
 
 	apply plugin: "propdeps"
 	apply plugin: "java"
+	apply plugin: 'maven'
 	apply from: "${gradleScriptDir}/ide.gradle"
 
 	compileJava {
-		sourceCompatibility=1.6
-		targetCompatibility=1.6
+		sourceCompatibility=1.7
+		targetCompatibility=1.7
 	}
 	compileTestJava {
-		sourceCompatibility=1.6
-		targetCompatibility=1.6
+		sourceCompatibility=1.7
+		targetCompatibility=1.7
 	}
 
 	test {
@@ -154,6 +155,8 @@ configure(rootProject) {
 
 	// don't publish the default jar for the root project
 	configurations.archives.artifacts.clear()
+        
+	tasks.withType(Javadoc).all {enabled = false} 
 
 	task api(type: Javadoc) {
 		group = "Documentation"
